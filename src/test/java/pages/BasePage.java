@@ -12,7 +12,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 public abstract class BasePage<T extends WebDriver> {
@@ -58,9 +60,9 @@ public abstract class BasePage<T extends WebDriver> {
 //        wait_until_true_or_timeout(ExpectedConditions.visibilityOfElementLocated(e));
 //    }
 //
-//    public void elementIsPresent(By e) {
-//        wait_until_true_or_timeout(ExpectedConditions.presenceOfElementLocated(e));
-//    }
+    public void elementIsPresent(By e) {
+        wait_until_true_or_timeout(ExpectedConditions.presenceOfElementLocated(e));
+    }
     /**
      * wait until element is clickable
      */
@@ -224,4 +226,15 @@ public abstract class BasePage<T extends WebDriver> {
 //            e.printStackTrace();
 //        }
 //    }
+
+    void switchToNextTab(){
+        Set<String> handles =driver.getWindowHandles();
+        Iterator<String> it = handles.iterator();
+        //iterate through your windows
+        while (it.hasNext()) {
+            String parent = it.next();
+            String newwin = it.next();
+            driver.switchTo().window(newwin);
+        }
+    }
 }

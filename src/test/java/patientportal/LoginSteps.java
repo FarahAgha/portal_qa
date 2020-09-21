@@ -66,11 +66,57 @@ public class LoginSteps extends AbstractStepDef {
     }
 
     @Then("^the user should be successfully logged into the power2patient home page$")
-    public void the_user_should_be_successfully_logged_into_the_power2patient_home_page() throws Throwable {
+    public void the_user_should_be_successfully_logged_into_the_power2patient_home_page() {
         PatientPortalHomePage patientPortalHomePage = new PatientPortalHomePage(driver);
         patientPortalHomePage.HomePageDisplays();
-
     }
+
+    /*
+    Navigational Links
+     */
+
+    @Given("user can see Power2Practice Logo")
+    public void user_can_see_power2practice_logo() {
+        // user can see Power2Practice Logo
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.power2PracticeLogo();
+    }
+
+    @Given("user can see Forgot Username? link")
+    public void user_can_see_forgot_username_link() {
+        // user can see Forgot Username? link
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.forgotUsernameLink();
+    }
+
+    @Given("user can see Forgot Password? link")
+    public void user_can_see_forgot_password_link() {
+        // user can see Forgot Password? link
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.forgotPasswordLink();
+    }
+
+    @Given("user can see Agreement text")
+    public void user_can_see_agreement_text() {
+        // user can see Agreement text
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.agreementText();
+    }
+
+    @Given("user can see Terms of Use link")
+    public void user_can_see_terms_of_use_link() {
+        // user can see Terms of Use link
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.termsOfUseLink();
+    }
+
+    @Given("user can see Register Here link")
+    public void user_can_see_register_here_link() {
+        // user can see Register Here link
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.registerHereLink();
+    }
+
 
 
 
