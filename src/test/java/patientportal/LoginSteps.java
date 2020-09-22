@@ -19,14 +19,13 @@ public class LoginSteps extends AbstractStepDef {
     private final static Logger log = Logger.getLogger(LoginSteps.class.getName());
 
     protected WebDriver driver;
+    public LoginSteps() { driver = Hooks.driver; }
 
     //TODO username and password from config file
     String username = "fagha_justin";
     String password = "we1c0me1";
+    String invalidPassword = "Invalidpassword1";
 
-    public LoginSteps() {
-        driver = Hooks.driver;
-    }
     @Given("the Power2Patient test Login page is loaded")
     public void the_Power2Patient_test_Login_page_is_loaded() {
         final String __functionName = "the_Power2Practice_Login_is_loaded";
@@ -53,11 +52,17 @@ public class LoginSteps extends AbstractStepDef {
         LoginPage loginPage= new LoginPage(driver);
         loginPage.enterUsername(username);
     }
-    @When("the user enters password field in power2patient login page")
-    public void the_user_enters_password_field_in_power2patient_login_page() {
-        Log.info("Entering Password");
+    @When("the user enters {string} password field in power2patient login page")
+    public void the_user_enters_password_field_in_power2patient_login_page(String passwordcheck) {
         LoginPage loginPage= new LoginPage(driver);
-        loginPage.enterPassword(password);
+        if(passwordcheck.equals("valid")) {
+            Log.info("Entering Valid Password");
+            loginPage.enterPassword(password);
+        }
+        else{
+            Log.info("Entering Invalid Password");
+            loginPage.enterPassword(invalidPassword);
+        }
     }
     @When("^the user selects the sign in button in power2patient login page$")
     public void the_user_selects_the_sign_in_button_in_power2patient_login_page(){
@@ -69,6 +74,13 @@ public class LoginSteps extends AbstractStepDef {
     public void the_user_should_be_successfully_logged_into_the_power2patient_home_page() {
         PatientPortalHomePage patientPortalHomePage = new PatientPortalHomePage(driver);
         patientPortalHomePage.HomePageDisplays();
+    }
+
+    //Incorrect password
+    @Then("the user should see error message and remain on Login page")
+    public void the_user_should_see_error_message_and_remain_on_login_page() {
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.InvalidLoginErrorDisplays();
     }
 
     /*

@@ -82,6 +82,11 @@ public class LoginPage extends BasePage{
         assertTrue(driver.getCurrentUrl().contains("power2patient.net/pui/identity/register-here"));
     }
 
+    public void InvalidLoginErrorDisplays(){
+        Log.info("Verifying Invalid Login credentials");
+        assertTrue(elementIsDisplayed(By.xpath("//*[@class='alert alert-danger']")));
+    }
+
     public void getVersion()
     {
         elementIsDisplayed(By.cssSelector("html body"));
